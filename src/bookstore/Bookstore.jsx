@@ -21,9 +21,9 @@ function BookStore() {
         <Col md={10}>
           <Row>
             {bookInStore.books.map((book, index) => (
-              <Col md={3} className='p-3' key={index}>
+              <Col md={3} className='p-3 d-flex flex-column' key={index}>
                 <div className='book-container position-relative'>
-                  <p className='fs-5 mb-0 text-center'>{book?.name}</p>
+                  <p className='fs-5 mb-0 text-center title'>{book?.name}</p>
                   <p className='fs-5 mb-0 text-primary text-center'>
                     $ {book?.price}
                   </p>

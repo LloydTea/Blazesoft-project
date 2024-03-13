@@ -14,7 +14,7 @@ function BookModal() {
         onHide={() => storeTrigger(openModal())}
         centered
         keyboard={false}>
-        <Modal.Header closeButton>
+        <Modal.Header closeButton className='bg-primary text-dark'>
           {newEntry ? "Add A New Book" : "Edit Book Details"}
         </Modal.Header>
         <Modal.Body>
@@ -100,11 +100,11 @@ function BookModal() {
             <Button variant='primary' type='submit'>
               {newEntry ? (
                 <>
-                  <i className='bi bi-journal-plus'></i> Add A Book
+                  Add A Book <i className='bi bi-journal-plus'></i>
                 </>
               ) : (
                 <>
-                  <i className='bi bi-journal-plus'></i> Update Book Details
+                  Update Book Details <i className='bi bi-pencil-square'></i>
                 </>
               )}
             </Button>
