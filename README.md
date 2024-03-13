@@ -1,8 +1,41 @@
-# React + Vite
+# Blazesoft BookStore
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Blazesoft Book Store is a React Redux applicatiion for adding books, updating books, deleting books.
 
-Currently, two official plugins are available:
+## Installation
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Use the package manager [npm](https://www.npmjs.com/) to install and run Blazesoft BookStore.
+
+```bash
+npm i
+```
+
+## Run Locally
+
+```bash
+npm run dev
+```
+
+## To Build
+
+```bash
+npm run build
+```
+
+## Authors
+
+- [@LloydTea](https://github.com/LloydTea)
+- Website: [lloydtea.pro](https://lloydtea.pro/)
+
+## 🚀 About Me
+
+I am a high-performing, diligent fullstack developer, consistently ensuring the development of high-end responsive websites that look good on every device and also cater to the core values of every client.
+
+##
+
+      _      _      ______     _______ _______ ______
+     | |    | |    / __ \ \   / /  __ \__   __|  ____|   /\
+     | |    | |   | |  | \ \_/ /| |  | | | |  | |__     /  \
+     | |    | |   | |  | |\   / | |  | | | |  |  __|   / /\ \
+     | |____| |___| |__| | | |  | |__| | | |  | |____ / ____ \
+     |______|______\____/  |_|  |_____/  |_|  |______/_/    \_\
