@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 export const bookSlice = createSlice({
-  name: "books",
+  name: "bookstore",
   initialState: {
     bookList: {
       books: [
@@ -37,7 +37,7 @@ export const bookSlice = createSlice({
       );
       state.bookList = BookListHolder;
     },
-    udpatedBook: (state, bookToChange) => {
+    updatedBook: (state, bookToChange) => {
       const bookUpdatedDetails = bookToChange.payload.bookDetails;
       const index = bookToChange.payload.bookIndex;
       const bookList = state.bookList;
@@ -62,7 +62,12 @@ export const bookSlice = createSlice({
   },
 });
 
-export const { addBook, deleteBook, openModal, udpatedBook, getBookDetails } =
+export const { addBook, deleteBook, openModal, updatedBook, getBookDetails } =
   bookSlice.actions;
+
+export const selectBookList = (state) => state.bookstore.bookList;
+export const selectModalController = (state) => state.bookstore.modalController;
+export const selectBookEntry = (state) => state.bookstore.bookEntry;
+export const selectSelectedBook = (state) => state.bookstore.selectBook;
 
 export default bookSlice.reducer;

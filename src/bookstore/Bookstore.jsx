@@ -1,9 +1,14 @@
 import { Button, Col, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteBook, getBookDetails, openModal } from "./books";
+import {
+  deleteBook,
+  getBookDetails,
+  openModal,
+  selectBookList,
+} from "./bookSlice";
 
 function BookStore() {
-  const bookInStore = useSelector((state) => state.books.bookList);
+  const bookInStore = useSelector(selectBookList);
   const storeTrigger = useDispatch();
   return (
     <div>

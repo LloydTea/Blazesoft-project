@@ -1,11 +1,18 @@
 import { Button, Col, FloatingLabel, Form, Modal, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { addBook, openModal, udpatedBook } from "./books";
+import {
+  addBook,
+  openModal,
+  selectBookEntry,
+  selectModalController,
+  selectSelectedBook,
+  updatedBook,
+} from "./bookSlice";
 
 function BookModal() {
-  const modalState = useSelector((state) => state.books.modalController);
-  const newEntry = useSelector((state) => state.books.bookEntry);
-  const selectedBook = useSelector((state) => state.books.selectBook);
+  const modalState = useSelector(selectModalController);
+  const newEntry = useSelector(selectBookEntry);
+  const selectedBook = useSelector(selectSelectedBook);
   const storeTrigger = useDispatch();
   return (
     <div>
@@ -39,10 +46,9 @@ function BookModal() {
                       description: formEntry?.description.value,
                     },
                   };
-              console.log(formData);
               newEntry
                 ? await storeTrigger(addBook(formData))
-                : await storeTrigger(udpatedBook(formData));
+                : await storeTrigger(updatedBook(formData));
               e.target.reset();
               storeTrigger(openModal());
             }}>

@@ -5,6 +5,9 @@ import path from "path";
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
+  build: {
+    outDir: "./dist",
+  },
   resolve: {
     alias: {
       "~n_m": path.resolve(__dirname, "node_modules"),
