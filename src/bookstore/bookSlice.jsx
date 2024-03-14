@@ -3,35 +3,27 @@ import { createSlice } from "@reduxjs/toolkit";
 export const bookSlice = createSlice({
   name: "bookstore",
   initialState: {
-    bookList: {
-      books: [
-        {
-          name: "Harry Potter",
-          category: "Science Fiction",
-          price: 200,
-          description: "Lorem ipsum is a dummy text",
-        },
-      ],
+    booksInStore: {
+      books: [],
     },
     modalController: false,
     bookEntry: true,
     selectBook: {
       bookNumber: null,
-      bookDetails: {
-        name: "",
-        category: "",
-        price: "",
-        description: "",
-      },
+      bookDetails: {},
     },
   },
   reducers: {
+    setInitialBook: (state, initialBookList) => {
+      const InitialBookList = initialBookList.payload;
+      state.booksInStore.books = InitialBookList;
+    },
     addBook: (state, newBook) => {
       const NewBookEntry = newBook.payload;
-      state.bookList.books.push(NewBookEntry);
+      state.booksInStore.books.push(NewBookEntry);
     },
     deleteBook: (state, bookId) => {
-      const BookListHolder = state.bookList;
+      const BookListHolder = state.booksInStore;
       BookListHolder.books = BookListHolder.books.filter(
         (book, id) => id !== bookId.payload
       );
@@ -40,12 +32,12 @@ export const bookSlice = createSlice({
     updatedBook: (state, bookToChange) => {
       const bookUpdatedDetails = bookToChange.payload.bookDetails;
       const index = bookToChange.payload.bookIndex;
-      const bookList = state.bookList;
-      bookList.books[index] = {
-        ...bookList.books[index],
+      const booksInStore = state.booksInStore;
+      booksInStore.books[index] = {
+        ...booksInStore.books[index],
         ...bookUpdatedDetails,
       };
-      state.bookList = bookList;
+      state.bookList = booksInStore;
     },
     openModal: (state) => {
       state.modalController = !state.modalController;
@@ -56,18 +48,24 @@ export const bookSlice = createSlice({
     getBookDetails: (state, bookName) => {
       state.bookEntry = false;
       state.selectBook.bookNumber = bookName.payload;
-      state.selectBook.bookDetails = state.bookList.books[bookName.payload];
+      state.selectBook.bookDetails = state.booksInStore.books[bookName.payload];
       state.modalController = !state.modalController;
     },
   },
 });
 
-export const { addBook, deleteBook, openModal, updatedBook, getBookDetails } =
-  bookSlice.actions;
+export const {
+  setInitialBook,
+  addBook,
+  deleteBook,
+  openModal,
+  updatedBook,
+  getBookDetails,
+} = bookSlice.actions;
 
-export const selectBookList = (state) => state.bookstore.bookList;
-export const selectModalController = (state) => state.bookstore.modalController;
-export const selectBookEntry = (state) => state.bookstore.bookEntry;
-export const selectSelectedBook = (state) => state.bookstore.selectBook;
+export const allBooksInStore = (state) => state.bookstore.booksInStore;
+export const ModalController = (state) => state.bookstore.modalController;
+export const BookEntry = (state) => state.bookstore.bookEntry;
+export const SelectedBook = (state) => state.bookstore.selectBook;
 
 export default bookSlice.reducer;

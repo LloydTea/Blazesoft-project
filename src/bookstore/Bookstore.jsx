@@ -4,11 +4,32 @@ import {
   deleteBook,
   getBookDetails,
   openModal,
-  selectBookList,
+  allBooksInStore,
+  setInitialBook,
 } from "./bookSlice";
+import { useEffect } from "react";
 
 function BookStore() {
-  const bookInStore = useSelector(selectBookList);
+  const bookInStore = useSelector(allBooksInStore);
+  const BookStoreTrigger = useDispatch();
+  useEffect(() => {
+    const storedBookstore = JSON.parse(localStorage.getItem("bookstore"));
+    const initialBooks =
+      storedBookstore && [storedBookstore].length > 1
+        ? [storedBookstore]
+        : [
+            {
+              name: "Harry Potter",
+              category: "Science Fiction",
+              price: 200,
+              description: "Lorem ipsum is a dummy text",
+            },
+          ];
+    BookStoreTrigger(setInitialBook(initialBooks));
+  }, []);
+  useEffect(() => {
+    localStorage.setItem("bookstore", JSON.stringify(bookInStore));
+  }, [bookInStore]);
   const storeTrigger = useDispatch();
   return (
     <div>

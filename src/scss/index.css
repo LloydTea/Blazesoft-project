@@ -11,7 +11,7 @@
   border: solid 1px var(--bs-light);
   flex: 1;
   border-radius: 10px 10px 0 0;
-
+  word-break: break-all;
   .title{
     flex: 1;
   }

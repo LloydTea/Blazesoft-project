@@ -1,18 +1,27 @@
-import { Button, Col, FloatingLabel, Form, Modal, Row } from "react-bootstrap";
+import {
+  Button,
+  Col,
+  FloatingLabel,
+  Form,
+  InputGroup,
+  Modal,
+  Row,
+} from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addBook,
   openModal,
-  selectBookEntry,
-  selectModalController,
-  selectSelectedBook,
+  ModalController,
+  SelectedBook,
   updatedBook,
+  BookEntry,
 } from "./bookSlice";
+import InputGroupText from "react-bootstrap/esm/InputGroupText";
 
 function BookModal() {
-  const modalState = useSelector(selectModalController);
-  const newEntry = useSelector(selectBookEntry);
-  const selectedBook = useSelector(selectSelectedBook);
+  const modalState = useSelector(ModalController);
+  const entryState = useSelector(BookEntry);
+  const selectedBook = useSelector(SelectedBook);
   const storeTrigger = useDispatch();
   return (
     <div>
@@ -22,7 +31,7 @@ function BookModal() {
         centered
         keyboard={false}>
         <Modal.Header closeButton className='bg-primary text-dark'>
-          {newEntry ? "Add A New Book" : "Edit Book Details"}
+          {entryState ? "Add A New Book" : "Edit Book Details"}
         </Modal.Header>
         <Modal.Body>
           <Form
@@ -30,7 +39,7 @@ function BookModal() {
             onSubmit={async (e) => {
               e.preventDefault();
               const formEntry = e.target.elements;
-              const formData = newEntry
+              const formData = entryState
                 ? {
                     name: formEntry?.bookname.value,
                     price: formEntry?.price.value,
@@ -46,7 +55,7 @@ function BookModal() {
                       description: formEntry?.description.value,
                     },
                   };
-              newEntry
+              entryState
                 ? await storeTrigger(addBook(formData))
                 : await storeTrigger(updatedBook(formData));
               e.target.reset();
@@ -65,17 +74,18 @@ function BookModal() {
             </FloatingLabel>
             <Row>
               <Col md={6}>
-                <FloatingLabel
-                  className='mb-3'
-                  name='price'
-                  controlId='price'
-                  label='Price'>
-                  <Form.Control
-                    type='number'
-                    required
-                    defaultValue={selectedBook?.bookDetails.price}
-                    placeholder='Price'></Form.Control>
-                </FloatingLabel>
+                <InputGroup className='mb-3'>
+                  <InputGroupText className='bg-transparent text-primary'>
+                    $
+                  </InputGroupText>
+                  <FloatingLabel name='price' controlId='price' label='Price'>
+                    <Form.Control
+                      type='number'
+                      required
+                      defaultValue={selectedBook?.bookDetails.price}
+                      placeholder='Price'></Form.Control>
+                  </FloatingLabel>
+                </InputGroup>
               </Col>
               <Col md={6}>
                 <FloatingLabel
@@ -104,7 +114,7 @@ function BookModal() {
                 style={{ height: "80px" }}></Form.Control>
             </FloatingLabel>
             <Button variant='primary' type='submit'>
-              {newEntry ? (
+              {entryState ? (
                 <>
                   Add A Book <i className='bi bi-journal-plus'></i>
                 </>
