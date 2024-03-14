@@ -22,6 +22,14 @@ npm run dev
 npm run build
 ```
 
+## Screenshot
+
+![BlazeSoft BookStore Sreenshot](https://github.com/LloydTea/Blazesoft-project/blob/d3c82f3f7b44809b04d35284de459685b23edd2a/src/assets/Screenshot.jpg)
+
+## Access Link
+
+      -[blazesoft.netlify.app] (https://blazesoft.netlify.app/)
+
 ## Authors
 
 - [@LloydTea](https://github.com/LloydTea)
