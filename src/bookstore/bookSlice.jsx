@@ -14,30 +14,40 @@ export const bookSlice = createSlice({
     },
   },
   reducers: {
-    setInitialBook: (state, initialBookList) => {
-      const InitialBookList = initialBookList.payload;
-      state.booksInStore.books = InitialBookList;
+    setInitialBook: (state, action) => {
+      state.booksInStore.books = [...action.payload];
     },
-    addBook: (state, newBook) => {
-      const NewBookEntry = newBook.payload;
-      state.booksInStore.books.push(NewBookEntry);
-    },
-    deleteBook: (state, bookId) => {
-      const BookListHolder = state.booksInStore;
-      BookListHolder.books = BookListHolder.books.filter(
-        (book, id) => id !== bookId.payload
+    addBook: (state, action) => {
+      const newBookEntry = action.payload;
+      state.booksInStore.books.push(newBookEntry);
+
+      localStorage.setItem(
+        "bookstore",
+        JSON.stringify(state.booksInStore.books)
       );
-      state.bookList = BookListHolder;
     },
-    updatedBook: (state, bookToChange) => {
-      const bookUpdatedDetails = bookToChange.payload.bookDetails;
-      const index = bookToChange.payload.bookIndex;
-      const booksInStore = state.booksInStore;
-      booksInStore.books[index] = {
-        ...booksInStore.books[index],
-        ...bookUpdatedDetails,
+    deleteBook: (state, action) => {
+      const bookId = action.payload;
+      state.booksInStore.books = state.booksInStore.books.filter(
+        (book, id) => id !== bookId
+      );
+
+      localStorage.setItem(
+        "bookstore",
+        JSON.stringify(state.booksInStore.books)
+      );
+    },
+    updatedBook: (state, action) => {
+      const { bookIndex, bookDetails } = action.payload;
+      state.booksInStore.books[bookIndex] = {
+        ...state.booksInStore.books[bookIndex],
+        ...bookDetails,
       };
-      state.bookList = booksInStore;
+
+      localStorage.setItem(
+        "bookstore",
+        JSON.stringify(state.booksInStore.books)
+      );
     },
     openModal: (state) => {
       state.modalController = !state.modalController;
@@ -45,10 +55,11 @@ export const bookSlice = createSlice({
       state.selectBook.bookNumber = null;
       state.selectBook.bookDetails = {};
     },
-    getBookDetails: (state, bookName) => {
+    getBookDetails: (state, action) => {
+      const bookName = action.payload;
       state.bookEntry = false;
-      state.selectBook.bookNumber = bookName.payload;
-      state.selectBook.bookDetails = state.booksInStore.books[bookName.payload];
+      state.selectBook.bookNumber = bookName;
+      state.selectBook.bookDetails = state.booksInStore.books[bookName];
       state.modalController = !state.modalController;
     },
   },

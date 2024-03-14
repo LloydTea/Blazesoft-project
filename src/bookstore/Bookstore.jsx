@@ -14,22 +14,19 @@ function BookStore() {
   const BookStoreTrigger = useDispatch();
   useEffect(() => {
     const storedBookstore = JSON.parse(localStorage.getItem("bookstore"));
-    const initialBooks =
-      storedBookstore && [storedBookstore].length > 1
-        ? [storedBookstore]
-        : [
-            {
-              name: "Harry Potter",
-              category: "Science Fiction",
-              price: 200,
-              description: "Lorem ipsum is a dummy text",
-            },
-          ];
+    // console.log(storedBookstore);
+    const initialBooks = storedBookstore
+      ? storedBookstore
+      : [
+          {
+            name: "Harry Potter",
+            category: "Science Fiction",
+            price: 200,
+            description: "Lorem ipsum is a dummy text",
+          },
+        ];
     BookStoreTrigger(setInitialBook(initialBooks));
   }, []);
-  useEffect(() => {
-    localStorage.setItem("bookstore", JSON.stringify(bookInStore));
-  }, [bookInStore]);
   const storeTrigger = useDispatch();
   return (
     <div>
