@@ -31,10 +31,10 @@ function BookStore() {
   return (
     <div>
       <Row className='justify-content-center align-items-center'>
-        <Col md={5} className='py-5'>
+        <Col xs={6} className='py-5'>
           <h2>Blazesoft</h2>
         </Col>
-        <Col md={5} className='text-end p-2'>
+        <Col xs={6} className='text-end p-2'>
           <Button
             variant='outline-primary'
             onClick={() => storeTrigger(openModal())}>
