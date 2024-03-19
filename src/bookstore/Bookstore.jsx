@@ -32,7 +32,7 @@ function BookStore() {
     <div>
       <Row className='justify-content-center align-items-center'>
         <Col xs={6} className='py-5'>
-          <h2>Blazesoft</h2>
+          <h2>Blaze</h2>
         </Col>
         <Col xs={6} className='text-end p-2'>
           <Button
